@@ -1,19 +1,34 @@
 import os, sys
-
-# Set environment
-os.environ["PYSPARK_PYTHON"] = sys.executable
-os.environ["PYSPARK_DRIVER_PYTHON"] = sys.executable
-
 from pyspark.sql import SparkSession
 
-print("Creating Spark session...")
-spark = SparkSession.builder \
-    .appName("QuickTest") \
-    .master("local[1]") \
-    .config("spark.python.worker.reuse", "false") \
-    .getOrCreate()
+def create_spark_session() -> SparkSession:
+    """ Create and return a Spark session """
+    os.environ["PYSPARK_PYTHON"] = sys.executable
+    os.environ["PYSPARK_DRIVER_PYTHON"] = sys.executable
 
-spark.sparkContext.setLogLevel("ERROR")
+    print("Creating Spark session...")
+    spark = SparkSession.builder \
+        .appName("QuickTest") \
+        .master("local[1]") \
+        .config("spark.python.worker.reuse", "false") \
+        .getOrCreate()
+
+    spark.sparkContext.setLogLevel("ERROR")
+    return spark 
+
+def stop_spark_session(spark: SparkSession):
+    """ Stop the given Spark session """
+    if spark:
+        print("Stopping Spark session...")
+        spark.stop()
+
+def test_data_loading(spark: SparkSession):
+    """ Test loading data into Spark DataFrame """
+    if spark: 
+        data_path = '../data/employees.json'
+        print(f"Loading data from {data_path}...")
+        df = spark.read.json(data_path)
+        return df 
 
 print("\nTest 1: Range")
 try:

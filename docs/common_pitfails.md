@@ -58,4 +58,28 @@ Get-Process python* | Stop-Process -Force # Check for running Python processes
 Get-Process | Where-Object {$_.Path -like "*PySpark_Local*"} | Stop-Process -Force # Or specifically look for anything using your venv
 ```
 
-### Error 2: ExecutionPolicy, cannot activate virtual enviornment
+### Error 2: ExecutionPolicy, cannot activate virtual environment
+
+You machine execution policy can prevent the execution of various scripts, including ones you create yourself. While this is typically a windows/powershell related error its a typical reason that prevents some virtual environments from being activated. A `remoteSigned` policy allows us to run locally created or signed scripts from trusted publishers. If we limit the scope to `process` then it only applies to the current session. Alternatively we can apply to the current user to keep the settings persistent.
+
+```powershell
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
+
+We can check the current execution policies applied by running the cmd:
+
+```powershell
+Get-ExecutionPolicy -List
+```
+
+The output should be something like
+
+```bash
+Scope          ExecutionPolicy
+-----          ---------------
+MachinePolicy  Undefined
+UserPolicy     Undefined
+Process        RemoteSigned    ← Your current session only
+CurrentUser    Undefined       ← Your user account
+LocalMachine   Undefined       ← All users
+```
