@@ -1,0 +1,2 @@
+[console_scripts]
+pyspark-check = pyspark_local.cli:main

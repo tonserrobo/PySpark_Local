@@ -1,20 +1,46 @@
+Metadata-Version: 2.4
+Name: pyspark-local
+Version: 0.1.0
+Summary: PySpark course materials with easy setup for students
+Requires-Python: <3.13,>=3.11
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: findspark>=2.0.1
+Requires-Dist: notebook>=7.4.7
+Requires-Dist: pyspark<4.0.0,>=3.5.0
+Requires-Dist: pyarrow>=14.0.0
+Provides-Extra: dev
+Requires-Dist: pytest>=7.4.0; extra == "dev"
+Requires-Dist: pytest-cov>=4.1.0; extra == "dev"
+Requires-Dist: pytest-timeout>=2.1.0; extra == "dev"
+Dynamic: license-file
+
 # PySpark Local: A simple guide to getting started using PySpark locally
 
-Simple Repo for running PySpark locally using VS Code, Jupyter Notebooks, Jetbrains or any other local IDE. NOTE, this repo is intended for Ulster University MSc Data Science students (Big data technologies COM739). However, if you find it useful then please feel free to use it. This repository now includes a streamlined setup that handles everything for you:
+Simple Repo for running PySpark locally using VS Code, Jupyter Notebooks, Jetbrains or any other local IDE. NOTE, this repo is intended for Ulster University MSc Data Science students (Big data technologies COM739). However, if you find it useful then please feel free to use it.
+
+## NEW: Simplified One-Line Setup! 🚀
+
+This repository now includes a streamlined setup that handles everything for you:
 
 ```python
 from pyspark_local import initialize_pyspark
 spark = initialize_pyspark()
 ```
 
+That's it! This single line will:
+- ✓ Check that Java is installed
+- ✓ Verify all PySpark dependencies
+- ✓ Create a configured Spark session
+- ✓ Run validation tests to ensure everything works
+
 See [SETUP_INSTRUCTIONS.md](SETUP_INSTRUCTIONS.md) for complete details, or jump to the [Quick Start](#quick-start) section below.
 
 ## Quick Start
 
 ### Prerequisites
-
 1. **Java 8 or 11** - Required for PySpark ([Installation guide](SETUP_INSTRUCTIONS.md#1-java-installation))
-2. **Python 3.11** - Check with `python --version`
+2. **Python 3.11 or 3.12** - Check with `python --version`
 
 ### Installation
 
@@ -44,7 +70,7 @@ See [student_example.ipynb](student_example.ipynb) for a complete tutorial!
 
 ## Installing PySpark locally with Notebooks (Manual Setup)
 
-As we have seen over the past few weeks, there is an issue on google Colab due to Java versions. Its not entirely fair to point the blame exclusively at Java, as the incompatibility comes from Java - `Python V3.13` and `PySpark 4.0.1`. I've discovered that it works best if we use `Java v11`, `Python 3.11` and we can continue to use `PySpark 3.5.1`. I originally tried to avoid introducing virtual environments as it introduces unnecessary complexity; however this is the real world of software engineering. If you want to learn more about virtual environments and the challenges of version control specifically The method i prefer to use when managing complex dependency relationships is UV. To setup PySpark locally and ensure the dependencies are managed we can go through the following process: 1. install UV, 2. Clone github repo, 3. activate venv and finally 4. sync dependencies.
+As we have seen over the past few weeks, there is an issue on google Colab due to Java versions. Its not entirely fair to point the blame exclusively at Java, as the incompatibility comes from Java - `Python V3.13` and `PySpark 4.0.1`. I've discovered that it works best if we use `Java v11`, `Python 3.11` and we can continue to use `PySpark 3.5.1`. I originally tried to avoid introducing virtual environments as it introduces unnecessary complexity; however this is the real world of software engineering. If you want to learn more about virtual environments and the challenges of version control specifically The method i prefer to use when managing complex dependency relationships is UV. To setup PySpark locally and ensure the dependencies are managed we can go through the following process
 
 ## Project Structure
 
@@ -73,17 +99,17 @@ PySpark_Local/
 
 ### File Descriptions
 
-| File/Directory        | Description                                                                                                          |
-| :-------------------- | :------------------------------------------------------------------------------------------------------------------- |
-| src/pyspark_local/    | **NEW!** Main package with setup, validation, and CLI tools                                                          |
-| tests/                | **NEW!** Comprehensive pytest test suite                                                                             |
-| student_example.ipynb | **NEW!** Complete tutorial showing one-line setup                                                                    |
-| SETUP_INSTRUCTIONS.md | **NEW!** Detailed setup and usage instructions                                                                       |
-| uv.lock               | Locks your Python project's dependencies to specific versions to ensure reproducible and cross-platform environments |
-| pyproject.toml        | Project metadata, dependencies, build systems, and tool configurations                                               |
-| README.md             | This file - main project overview                                                                                    |
-| LICENSE               | Standard MIT license details                                                                                         |
-| data/                 | Sample data files (employees.json, people.json) for testing PySpark                                                  |
+| File/Directory       | Description                                                                                                                                                          |
+| :------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| src/pyspark_local/   | **NEW!** Main package with setup, validation, and CLI tools                                                                                                         |
+| tests/               | **NEW!** Comprehensive pytest test suite                                                                                                                            |
+| student_example.ipynb| **NEW!** Complete tutorial showing one-line setup                                                                                                                   |
+| SETUP_INSTRUCTIONS.md| **NEW!** Detailed setup and usage instructions                                                                                                                      |
+| uv.lock              | Locks your Python project's dependencies to specific versions to ensure reproducible and cross-platform environments                                                |
+| pyproject.toml       | Project metadata, dependencies, build systems, and tool configurations                                                                                              |
+| README.md            | This file - main project overview                                                                                                                                   |
+| LICENSE              | Standard MIT license details                                                                                                                                        |
+| data/                | Sample data files (employees.json, people.json) for testing PySpark                                                                                                 |
 
 ### Installing UV
 
